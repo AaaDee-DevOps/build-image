@@ -1,7 +1,9 @@
-name: Build Java Docker Image Locally
+name: Build Java Docker Image on Workflow File Change
 
 on:
-  workflow_dispatch:
+  push:
+    paths:
+      - .github/workflows/**
 
 jobs:
   build:
