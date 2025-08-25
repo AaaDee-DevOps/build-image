@@ -1,11 +1,20 @@
-FROM ubuntu:20.04
+# Stage 1: Build stage
+FROM maven:3.9.6-eclipse-temurin-17 AS builder
 
-RUN apt-get update && \
-    apt-get install -y openjdk-11-jdk && \
-    apt-get clean
+WORKDIR /app
 
-RUN java -version
+# Copy source code and build
+COPY . .
+RUN mvn clean package -DskipTests
 
-CMD ["bash"]
+# Stage 2: Runtime stage
+FROM eclipse-temurin:17-jdk
 
+WORKDIR /app
 
+# Copy only the built artifact from the builder stage
+COPY --from=builder /app/target/*.jar app.jar
+
+EXPOSE 8080
+
+CMD ["java", "-jar", "app.jar"]
