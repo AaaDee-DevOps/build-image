@@ -7,3 +7,5 @@ RUN apt-get update && \
 RUN java -version
 
 CMD ["bash"]
+
+
