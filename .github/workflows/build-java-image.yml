@@ -47,7 +47,7 @@ jobs:
           push: false
           tags: |
             adeeashok/java-app:latest
-            ghcr.io/AaaDee-DevOps/java-app:latest
+            ghcr.io/aaadee-devops/java-app:latest
 
   push:
     name: Push Docker Image to Registries
